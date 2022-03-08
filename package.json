@@ -1,7 +1,7 @@
 {
     "name": "cordova-plugin-sms",
     "version": "0.0.1",
-    "description": "An Android and iOS Cordova plugin for Sms Consent Plugin.",
+    "description": "An Android Cordova plugin for Sms Consent Plugin.",
     "cordova": {
       "id": "cordova-plugin-sms",
       "platforms": [
@@ -10,7 +10,7 @@
     },
     "repository": {
       "type": "git",
-      "url": "git+https://github.com/enterprise-touch/cordova-plugin-idnow.git"
+      "url": "git+https://github.com/vviek/cordova-plugin-sms.git"
     },
     "keywords": [
       "sms","cordova","android"
@@ -24,7 +24,7 @@
     "author": "Vivek Patel<vivek.patel371@gmail.com>",
     "license": "MIT",
     "bugs": {
-      "url": "https://github.com/enterprise-touch/cordova-plugin-idnow/issues"
+      "url": "https://github.com/vviek/cordova-plugin-sms/issues"
     },
-    "homepage": "https://github.com/enterprise-touch/cordova-plugin-idnow"
+    "homepage": "https://github.com/vviek/cordova-plugin-sms"
   }

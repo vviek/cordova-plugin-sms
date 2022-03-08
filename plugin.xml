@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
         xmlns:android="http://schemas.android.com/apk/res/android"
-        id="cordova-plugin-idnow" version="0.0.1">
+        id="cordova-plugin-sms" version="0.0.1">
     <name>IdNowPlugin</name>
 
-    <description>An Android and iOS Cordova plugin for IdNow.</description>
+    <description>An Android  Cordova plugin for SMS consent api .</description>
     <license>MIT</license>
 
     <keywords>idnow,cordova,android</keywords>
-    <repo>https://github.com/enterprise-touch/cordova-plugin-idnow.git</repo>
-    <issue>https://github.com/enterprise-touch/cordova-plugin-idnow/issues</issue>
+    <repo>https://github.com/vviek/cordova-plugin-sms.git</repo>
+    <issue>https://github.com/vviek/cordova-plugin-sms/issues</issue>
   
     <engines>
         <engine name="cordova" version=">=3.0.0"/>

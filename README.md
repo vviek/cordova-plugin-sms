@@ -1,1 +1,1 @@
-# cordova-plugin-idnow
+# cordova-plugin-sms
