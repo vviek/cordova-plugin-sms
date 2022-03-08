@@ -15,22 +15,25 @@
         <engine name="cordova" version=">=3.0.0"/>
     </engines>
   
-    <js-module src="www/idnow.js" name="idnow">
-        <clobbers target="window.plugins.idnow" />
+    <js-module src="www/sms_user_consent.js" name="sms_user_consent">
+        <clobbers target="window.plugins.sms_user_consent" />
     </js-module>
     <platform name="android">
         
+<config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <receiver android:name="com.cordova.plugin.SmsBroadcastReceiver" android:enabled="true" android:exported="true"/>
+        </config-file>
 
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="SmsUserPlugin">
-                <param name="android-package" value="com.cordova.plugin.SmsUserPlugin"/>
+                <param name="android-package" value="com.cordova.plugin.SmsUserConsentPlugin"/>
             </feature>
         </config-file>
-      
-        
+
         <framework src="src/android/sms_consent.gradle" custom="true" type="gradleReference"/>
 
         <source-file src="src/android/SmsUserConsentPlugin.java" target-dir="src/com/cordova/plugin" />
+        <source-file src="src/android/SmsBroadcastReceiver.java" target-dir="src/com/cordova/plugin" />
               
     </platform>
 </plugin>
