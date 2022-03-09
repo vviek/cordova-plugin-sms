@@ -5,6 +5,7 @@ import static android.app.Activity.RESULT_OK;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -30,6 +31,7 @@ public class SmsUserConsentPlugin extends CordovaPlugin {
     private static final String STOP_LISTNING = "STOP_LISTNING";
     Activity mActivity;
     SmsBroadcastReceiver smsBroadcastReceiver;
+
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         this.mActivity = cordova.getActivity();
@@ -39,9 +41,15 @@ public class SmsUserConsentPlugin extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
-
+        Log.e("execute", ":" + action);
         if (START_LISTNING.equals(action)) {
-            startSmsUserConsent();
+            this.cordova.getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    startSmsUserConsent();
+                }
+            });
+            callbackContext.success();
             return true;
         }
         if (STOP_LISTNING.equals(action)) {
@@ -68,6 +76,7 @@ public class SmsUserConsentPlugin extends CordovaPlugin {
                 Toast.makeText(mActivity, "On OnFailure", Toast.LENGTH_LONG).show();
             }
         });
+
     }
 
     private void registerBroadcastReceiver() {

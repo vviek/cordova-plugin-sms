@@ -25,7 +25,7 @@
         </config-file>
 
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="SmsUserPlugin">
+            <feature name="SmsUserConsentPlugin">
                 <param name="android-package" value="com.cordova.plugin.SmsUserConsentPlugin"/>
             </feature>
         </config-file>
