@@ -31,7 +31,7 @@ public class SmsUserConsentPlugin extends CordovaPlugin {
     private static final String STOP_LISTNING = "STOP_LISTNING";
     Activity mActivity;
     SmsBroadcastReceiver smsBroadcastReceiver;
-
+    CallbackContext mCallbackContext;
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         this.mActivity = cordova.getActivity();
@@ -41,15 +41,19 @@ public class SmsUserConsentPlugin extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) {
+        mCallbackContext=callbackContext;
+
+
+
         Log.e("execute", ":" + action);
         if (START_LISTNING.equals(action)) {
-            this.cordova.getActivity().runOnUiThread(new Runnable() {
+            /*this.cordova.getActivity().runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
                     startSmsUserConsent();
                 }
-            });
-            callbackContext.success();
+            });*/
+            startSmsUserConsent();
             return true;
         }
         if (STOP_LISTNING.equals(action)) {
@@ -68,12 +72,12 @@ public class SmsUserConsentPlugin extends CordovaPlugin {
         client.startSmsUserConsent(null).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-                Toast.makeText(mActivity, "On Success", Toast.LENGTH_LONG).show();
+              //  Toast.makeText(mActivity, "On Success", Toast.LENGTH_LONG).show();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(mActivity, "On OnFailure", Toast.LENGTH_LONG).show();
+               // Toast.makeText(mActivity, "On OnFailure", Toast.LENGTH_LONG).show();
             }
         });
 
@@ -85,7 +89,9 @@ public class SmsUserConsentPlugin extends CordovaPlugin {
                 new SmsBroadcastReceiver.SmsBroadcastReceiverListener() {
                     @Override
                     public void onSuccess(Intent intent) {
-                        mActivity.startActivityForResult(intent, REQ_USER_CONSENT);
+                        Log.e("Message Received","Received");
+                       // mActivity.startActivityForResult(intent, REQ_USER_CONSENT);
+                        SmsUserConsentPlugin.this.cordova.startActivityForResult((CordovaPlugin)SmsUserConsentPlugin.this, intent, REQ_USER_CONSENT);
                     }
 
                     @Override
@@ -97,17 +103,23 @@ public class SmsUserConsentPlugin extends CordovaPlugin {
         mActivity.registerReceiver(smsBroadcastReceiver, intentFilter);
     }
 
+
+
     @Override
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        Log.e("OnActivity Result ",":Result");
         if (requestCode == REQ_USER_CONSENT) {
             if ((resultCode == RESULT_OK) && (data != null)) {
                 //That gives all message to us.
                 // We need to get the code from inside with regex
                 String message = data.getStringExtra(SmsRetriever.EXTRA_SMS_MESSAGE);
-                Toast.makeText(mActivity, message, Toast.LENGTH_LONG).show();
+                //Toast.makeText(mActivity, message, Toast.LENGTH_LONG).show();
+                mCallbackContext.success(message);
 
             }
         }
+        super.onActivityResult(requestCode, resultCode, data);
     }
-}
+
+    }
+
