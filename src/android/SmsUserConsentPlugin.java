@@ -113,7 +113,7 @@ public class SmsUserConsentPlugin extends CordovaPlugin {
                 //That gives all message to us.
                 // We need to get the code from inside with regex
                 String message = data.getStringExtra(SmsRetriever.EXTRA_SMS_MESSAGE);
-                //Toast.makeText(mActivity, message, Toast.LENGTH_LONG).show();
+                Toast.makeText(mActivity, message, Toast.LENGTH_LONG).show();
                 mCallbackContext.success(message);
 
             }
