@@ -57,7 +57,8 @@ public class SmsUserConsentPlugin extends CordovaPlugin {
             return true;
         }
         if (STOP_LISTNING.equals(action)) {
-            startSmsUserConsent();
+           mActivity.unregisterReceiver(smsBroadcastReceiver);
+           mCallbackContext.success();
             return true;
         }
         return false;
