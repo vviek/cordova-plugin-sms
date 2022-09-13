@@ -5,5 +5,5 @@ exports.registerDevice = function (success, error) {
 };
 
 exports.unregisterDevice = function (success, error) {
-   exec(success, error, 'SmsRetrieverPlugin', 'STOP_LISTNING');
+   exec(success, error, 'SmsUserConsentPlugin', 'STOP_LISTNING');
 };
